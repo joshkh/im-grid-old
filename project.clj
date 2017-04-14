@@ -4,7 +4,6 @@
                  [reagent "0.6.0" :exclusions [cljsjs/react]]
                  [cljsjs/react-with-addons "15.4.2-2"]
                  [cljsjs/react-dom "15.4.2-2" :exclusions [cljsjs/react]]
-                 [baking-soda "0.1.2"]
                  [re-frame "0.9.2"]
                  [compojure "1.5.0"]
                  [yogthos/config "0.8"]

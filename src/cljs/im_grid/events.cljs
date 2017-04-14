@@ -15,23 +15,18 @@
   (fn [_ _]
     db/default-db))
 
-(reg-event-db
-  ::store-load-results
-  (fn [db [_ {:keys [columnHeaders iTotalRecords start results] :as response}]]
-    (let [size (count results)]
-      (assoc db :response response))))
 
 (reg-event-db
   ::store-load-results
-  (fn [db [_ {:keys [columnHeaders iTotalRecords start results] :as response}]]
+  (fn [db [_ db-path {:keys [columnHeaders iTotalRecords start results] :as response}]]
     (let [size (count results)]
       (.log js/console size response)
-      (assoc db :response response))))
+      (update-in db db-path assoc :response response))))
 
 (reg-event-fx
   ::load-page-1
-  (fn [{db :db} [_ query]]
-    {:im-grid.effects/imcljs {:on-success [::store-load-results]
+  (fn [{db :db} [_ db-path query]]
+    {:im-grid.effects/imcljs {:on-success [::store-load-results db-path]
                               :request (fetch/table-rows
                                          global-service
                                          global-query
@@ -39,8 +34,8 @@
 
 (reg-event-fx
   ::load-page-3
-  (fn [{db :db} [_ query]]
-    {:im-grid.effects/imcljs {:on-success [::store-load-results]
+  (fn [{db :db} [_ db-path query]]
+    {:im-grid.effects/imcljs {:on-success [::store-load-results db-path]
                               :request (fetch/table-rows
                                          global-service
                                          global-query

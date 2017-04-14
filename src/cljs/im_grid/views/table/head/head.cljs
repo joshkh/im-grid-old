@@ -1,14 +1,15 @@
-(ns im-grid.views.table.head)
+(ns im-grid.views.table.head.head
+  (:require [clojure.string :refer [split join]]))
 
-(defn cell []
-  (fn [c]
-    [:td (:value c)]))
+(defn add-chevrons [string]
+  (vec (into [:span.column-label] (interpose [:i.fa.fa-angle-right.fa-fw] (map (fn [s] [:span s]) (split string " > "))))))
 
-(defn header []
-  (fn [h]
-    [:th (:display-name h)]))
+(defn header [db-path]
+  (fn [db-path h]
+    (println "s" (add-chevrons (:display-name h)))
+    [:div.im-grid-column-header (add-chevrons (:display-name h))]))
 
-(defn main []
-  (fn [headers]
-    [:thead
-     (into [:tr] (map (fn [h] [header h]) headers))]))
+(defn main [db-path]
+  (fn [db-path headers]
+    [:div.im-grid-head
+     (into [:div.im-grid-row] (map (fn [h] [header db-path h]) headers))]))

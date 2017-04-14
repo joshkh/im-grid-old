@@ -1,18 +1,80 @@
 @import "../resources/public/vendor/bootstrap/less/bootstrap";
-@import url('https://fonts.googleapis.com/css?family=Lora');
+@import "../resources/public/vendor/bootstrap/less/mixins/buttons";
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url("//fonts.googleapis.com/css?family=Lato:300,400,700,400italic,300italic");
+@import "../resources/public/vendor/font-awesome/less/font-awesome";
+
+@fa-font-path: "../vendor/font-awesome/fonts";
+
+@background-color: #fafafa;
+@border-color: #efefef;
+
+@background-color: white;
+@border-color: #efefef;
+@column-background-color: #2980b9;
+@column-border-color: #75a3c1;
+
+
+.btn {
+  .button-variant(#2980b9; white; white;);
+  // .button-variant(white; #3aa2e6; #3aa2e6;);
+}
 
 .im-grid {
-    font-family: 'Lora', serif;
+    font-family: lato, helvetica, arial, sans-serif;
     font-size: 12px;
+    color: #353232;
+    border: 1px solid @column-background-color;
+    .dashboard {
+        background-color: @column-background-color;
+        border-bottom: 1px solid @column-border-color;
+        padding: 8px 8px;
 
+
+    }
     .im-grid-body {
+        display: flex;
+        flex-direction: column;
         .im-grid-row {
+            display: flex;
+            border-top: 1px solid @border-color;
+            &:last-child {
+                border-bottom: 1px solid @border-color;
+            }
             .im-grid-cell {
-                padding: 4px;
-                border-top: 1px solid white;
-                border-right: 1px solid white;
-                background-color: #f6f1f1;
+                flex: 1 0;
+                padding: 8px;
+                background-color: @background-color;
+                border-right: 1px solid @border-color;
+                &:first-child {
+                    border-left: 1px solid @border-color;
+                }
             }
         }
     }
+    .im-grid-head {
+        display: flex;
+        flex-direction: column;
+        .im-grid-row {
+            display: flex;
+            .im-grid-column-header {
+                flex: 1 0;
+                font-size: 16px;
+                padding: 8px 8px;
+                color: white;
+                background-color: @column-background-color;
+                &:not(:last-child) {
+                     border-right: 1px solid @column-border-color;
+                }
+            }
+        }
+    }
+}
+
+.rounder {
+    background-color: hsla(145, 63%, 42%, 0.8);
+    padding: 1px 4px;
+    color: white;
+    border-radius: 6px;
 }

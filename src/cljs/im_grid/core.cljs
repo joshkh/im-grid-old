@@ -15,7 +15,7 @@
 
 (defn mount-root []
   (re-frame/clear-subscription-cache!)
-  (reagent/render [views/main]
+  (reagent/render [views/main [:grids :grid1]]
                   (.getElementById js/document "app")))
 
 (defn ^:export init []
